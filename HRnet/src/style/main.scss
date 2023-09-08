@@ -1,0 +1,24 @@
+// Shared
+@import "./shared/variables";
+// @import './shared/functions';
+@import "./shared/mixins";
+// @import './shared/animations';
+
+// Base
+@import "./base/reset";
+@import "./base/typography";
+
+// Components
+@import "./components/form";
+@import "./components/button";
+// @import './components/error';
+@import "./components/nav";
+
+// Layouts
+@import "./layouts/header";
+// @import './layouts/footer';
+
+//Pages
+@import "./pages/homepage";
+@import "./pages/createemployee";
+@import "./pages/employeelist";

@@ -1,0 +1,19 @@
+.button {
+  background-color: $color-quaternary;
+  border: none;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  color: $color-tertiary;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: map-get($font-size, 16px);
+  margin: 4px 2px;
+  cursor: pointer;
+  min-width: 200px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-tertiary;
+  }
+}

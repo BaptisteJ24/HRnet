@@ -1,0 +1,21 @@
+h2,
+p {
+  text-align: center;
+}
+
+h2 {
+  font-size: map-get($font-size, 32px);
+  color: $color-primary;
+
+  @include tablet-and-more {
+    font-size: map-get($font-size, 48px);
+  }
+}
+
+p {
+  font-size: map-get($font-size, 18px);
+
+  @include tablet-and-more {
+    font-size: map-get($font-size, 24px);
+  }
+}
