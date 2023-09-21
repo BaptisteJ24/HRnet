@@ -10,13 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@baptistej/react-dropdown": "^1.0.4",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.5.0",
     "prettier": "^3.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.5.4",
+    "react-datepicker": "^4.18.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
+    "react-modal": "^3.16.1",
     "react-redux": "^8.1.2",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",
