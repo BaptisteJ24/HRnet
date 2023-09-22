@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import Dropdown from "@baptistej/react-dropdown";
 import { capitalizeFirstLetter } from "../../utils/utils";
 import DatePicker from "react-datepicker";
+import PropTypes from "prop-types";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 import axios from "axios";
 
-const Form = () => {
+const Form = ({ handleShowModal }) => {
   const {
     register,
     handleSubmit,
@@ -17,8 +19,8 @@ const Form = () => {
 
   const [states, setStates] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [birthdate, setBirthdate] = useState(new Date());
-  const [startdate, setStartDate] = useState(new Date());
+  const [birthdate, setBirthdate] = useState(null);
+  const [startdate, setStartDate] = useState(null);
 
   useEffect(() => {
     axios
@@ -34,7 +36,12 @@ const Form = () => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
+    if (checkValidity(data)) {
+      console.log("Form submitted successfully :", data);
+      handleShowModal(true);
+    } else {
+      console.log("Form not submitted. Please check the fields :", data);
+    }
   };
 
   const checkValidity = (data) => {
@@ -58,7 +65,13 @@ const Form = () => {
       (fieldName) => !errors[fieldName]
     );
 
-    return hasAllRequiredFields && areAllFieldsValid;
+    const birthdateIsValid = () => {
+      const eighteenYearsAgo = new Date();
+      eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+      return birthdate <= eighteenYearsAgo;
+    };
+
+    return hasAllRequiredFields && areAllFieldsValid && birthdateIsValid();
   };
 
   const dropdownStyles = {
@@ -84,6 +97,7 @@ const Form = () => {
   const labelProps = (name) => ({
     className: "form__label",
     "data-error": `A valid ${name} is required.`,
+    "data-isvalid": `${!errors[name]}`,
   });
 
   const inputProps = (name) => ({
@@ -102,11 +116,7 @@ const Form = () => {
       <div className="form__content">
         <div className="form__content__wrapper">
           {["firstname", "lastname"].map((name) => (
-            <label
-              key={name}
-              {...labelProps(name)}
-              data-isvalid={!errors[name]}
-            >
+            <label key={name} {...labelProps(name)}>
               <span className="label__title">
                 {capitalizeFirstLetter(name)}
               </span>
@@ -114,11 +124,7 @@ const Form = () => {
             </label>
           ))}
           {["birthdate", "startdate"].map((name) => (
-            <label
-              key={name}
-              {...labelProps(name)}
-              data-isvalid={!errors[name]}
-            >
+            <label key={name} {...labelProps(name)}>
               <span className="label__title">
                 {capitalizeFirstLetter(name)}
               </span>
@@ -139,32 +145,14 @@ const Form = () => {
           ))}
         </div>
         <div className="form__content__wrapper">
-          <label
-            className="form__label"
-            data-error="A valid street is required."
-            data-isvalid={!errors.street}
-          >
-            <span className="label__title">Street</span>
-            <input
-              type="text"
-              id="street"
-              placeholder="Street"
-              {...register("street")}
-            />
-          </label>
-          <label
-            className="form__label"
-            data-error="A valid city is required."
-            data-isvalid={!errors.city}
-          >
-            <span className="label__title">City</span>
-            <input
-              type="text"
-              id="city"
-              placeholder="City"
-              {...register("city")}
-            />
-          </label>
+          {["street", "city"].map((name) => (
+            <label key={name} {...labelProps(name)}>
+              <span className="label__title">
+                {capitalizeFirstLetter(name)}
+              </span>
+              <input {...inputProps(name)} />
+            </label>
+          ))}
           <label className="form__label">
             <span className="label__title">State</span>
             <Dropdown
@@ -175,18 +163,9 @@ const Form = () => {
               onSelected={(value) => handleFieldChange("state", value)}
             />
           </label>
-          <label
-            className="form__label"
-            data-error="A valid ZIP Code is required."
-            data-isvalid={!errors.zipcode}
-          >
+          <label {...labelProps("zipcode")}>
             <span className="label__title">ZIP Code</span>
-            <input
-              type="text"
-              id="zipcode"
-              placeholder="ZIP Code"
-              {...register("zipcode")}
-            />
+            <input {...inputProps("zipcode")} />
           </label>
         </div>
       </div>
@@ -205,6 +184,14 @@ const Form = () => {
       </button>
     </form>
   );
+};
+
+Form.defaultProps = {
+  handleShowModal: () => {},
+};
+
+Form.propTypes = {
+  handleShowModal: PropTypes.func,
 };
 
 export default Form;
