@@ -1,5 +1,10 @@
+// Redux slice : employees
+
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * description: initial state of the employees slice. Contains a list of employees.
+ */
 const initialState = {
   employees: [
     {
@@ -197,10 +202,16 @@ const initialState = {
   ],
 };
 
+/**
+ * description: slice containing the employees list and the addEmployee action.
+ */
 const employeesSlice = createSlice({
   name: "employee",
   initialState,
   reducers: {
+    /**
+     * description: adds an employee to the employees list.
+     */
     addEmployee: (state, action) => {
       const {
         firstname,
@@ -214,6 +225,7 @@ const employeesSlice = createSlice({
         department,
       } = action.payload;
 
+      // Check if all the required fields are present. If so, add the employee to the list. Also add an id to the new employee based on the last id in the list.
       if (
         firstname &&
         lastname &&

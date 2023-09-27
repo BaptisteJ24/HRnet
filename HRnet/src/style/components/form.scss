@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 1000px;
   padding: 20px;
-  border: 1px solid $color-quaternary;
+  border: 1px solid $color-tertiary;
   border-radius: 15px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   margin-top: 10px;
@@ -30,12 +30,12 @@
       width: 100%;
       padding: 5px;
       height: 35px;
-      border: 1px solid $color-quaternary;
+      border: 1px solid $color-tertiary;
       border-radius: 0.25rem;
 
       &:focus {
         outline: none;
-        border: 2px solid $color-quaternary;
+        border: 2px solid $color-tertiary;
       }
     }
 
@@ -66,10 +66,10 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 50px;
 
     @include tablet-and-more {
       flex-direction: row;
+      gap: 50px;
     }
 
     &__wrapper {

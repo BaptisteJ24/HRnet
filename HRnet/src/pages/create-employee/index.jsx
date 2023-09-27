@@ -1,5 +1,9 @@
 import Form from "../../components/form";
 
+/**
+ * description: CreateEmployee page
+ * @return {JSX} - CreateEmployee page
+ */
 const CreateEmployee = () => {
   return (
     <div className="create-employee">

@@ -6,6 +6,10 @@ import EmployeeList from "./pages/employee-list";
 import Error from "./components/error";
 import "./style/main.scss";
 
+/**
+ * description: App component
+ * @return {JSX} - App component
+ */
 function App() {
   return (
     <Router>

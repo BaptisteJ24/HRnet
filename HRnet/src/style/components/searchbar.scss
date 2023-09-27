@@ -4,24 +4,29 @@
   align-items: center;
   height: 32px;
 
+  &__text {
+    font-size: map-get($font-size, 18px);
+    white-space: nowrap;
+  }
+
   &__label {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-
-    &__text {
-      font-size: map-get($font-size, 18px);
-    }
   }
 
   &__input {
     height: 32px;
-    width: 200px;
+    width: 180px;
     border-radius: 5px 0 0 5px;
     border: 1px solid #e5e5e5;
     padding: 0 10px;
-    border: 1px solid $color-quaternary;
+    border: 1px solid $color-tertiary;
+
+    @media screen and (min-width: 400px) {
+      width: 200px;
+    }
 
     &:focus {
       outline: none;
@@ -39,10 +44,10 @@
     justify-content: center;
     border-radius: 0 5px 5px 0;
     border: none;
-    background-color: $color-quaternary;
+    background-color: $color-tertiary;
     text-align: center;
-    width: 32px;
-    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
 
     &:hover {
       cursor: pointer;
@@ -51,6 +56,11 @@
 
     &__icon {
       padding: 5px;
+      color: white;
+    }
+
+    &__text {
+      font-size: map-get($font-size, 18px);
       color: white;
     }
   }

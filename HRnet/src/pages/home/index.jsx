@@ -1,3 +1,7 @@
+/**
+ * description: Home page
+ * @return {JSX} - Home page
+ */
 const Home = () => {
   return (
     <div className="homepage">

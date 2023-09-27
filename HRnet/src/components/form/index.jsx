@@ -1,3 +1,4 @@
+// Libraries
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -5,17 +6,23 @@ import Dropdown from "@baptistej/react-dropdown";
 import ReactModal from "react-modal";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-import { capitalizeFirstLetter, formatDateToString } from "../../utils/utils";
 import * as EmployeesActions from "../../features/employees";
+import { capitalizeFirstLetter, formatDateToString } from "../../utils/utils";
 
+// Styles
 import "react-datepicker/dist/react-datepicker.css";
 
+/**
+ * description: Form component for creating a new employee
+ * @return {JSX} - Form component
+ */
 const Form = () => {
   const { register, handleSubmit, setValue, formState } = useForm();
   const { errors } = formState;
 
   const dispatch = useDispatch();
 
+  // React States
   const [states, setStates] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [birthdate, setBirthdate] = useState(null);
@@ -40,11 +47,17 @@ const Form = () => {
       });
   }, []);
 
+  /**
+   * description: Reset the form and close the modal
+   */
   const handleReset = () => {
     resetForm();
     setShowModal(false);
   };
 
+  /**
+   * description: Function to reset the form
+   */
   const resetForm = () => {
     setResetDropdown(!resetDropdown);
     formRef.current.reset();
@@ -52,6 +65,10 @@ const Form = () => {
     setStartdate(null);
   };
 
+  /**
+   * description: Function to submit the form. Check the validity of the fields before submitting.
+   * @param {Object} data - Data from the form
+   */
   const onSubmit = (data) => {
     if (checkValidity(data)) {
       data.birthdate = formatDateToString(birthdate);
@@ -64,6 +81,10 @@ const Form = () => {
     }
   };
 
+  /**
+   * description: Function to check the validity of the fields
+   * @param {Object} data - Data to check
+   */
   const checkValidity = (data) => {
     const requiredFields = [
       "firstname",
@@ -77,6 +98,9 @@ const Form = () => {
       "department",
     ];
 
+    /**
+     * description: Validation rules for each field
+     */
     const validationRules = {
       firstname: (value) => {
         return value.length >= 3;
@@ -111,10 +135,16 @@ const Form = () => {
       },
     };
 
+    /**
+     * description: Check if all required fields are filled
+     */
     const hasAllRequiredFields = requiredFields.every(
       (fieldName) => !!data[fieldName]
     );
 
+    /**
+     * description: Check if all fields are valid according to the validation rules
+     */
     const areAllFieldsValid = requiredFields.every((fieldName) => {
       const validationRule = validationRules[fieldName];
       if (validationRule) {
@@ -125,6 +155,9 @@ const Form = () => {
     return hasAllRequiredFields && areAllFieldsValid;
   };
 
+  /**
+   * description: Styles for the dropdowns
+   */
   const dropdownStyles = {
     dropdown: {
       margin: "0",
@@ -145,12 +178,18 @@ const Form = () => {
     },
   };
 
+  /**
+   * description: Props for the labels
+   */
   const labelProps = (name) => ({
     className: "form__label",
     "data-error": `A valid ${name} is required.`,
     "data-isvalid": `${!errors[name]}`,
   });
 
+  /**
+   * description: Props for the inputs
+   */
   const inputProps = (name) => ({
     type: "text",
     id: name,
@@ -158,10 +197,16 @@ const Form = () => {
     ...register(name, { required: true }),
   });
 
+  /**
+   * description: Function to handle the change of a field. Update the value of the field in the react-hook-form.
+   */
   const handleFieldChange = (name, value) => {
     setValue(name, value);
   };
 
+  /**
+   * description: Render the form
+   */
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <div className="form__content">
