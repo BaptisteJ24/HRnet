@@ -38,6 +38,162 @@ const initialState = {
       zip: "60601",
       department: "Legal",
     },
+    {
+      id: 4,
+      firstname: "Diana",
+      lastname: "Prince",
+      birthdate: "1980-07-02",
+      startdate: "2005-11-15",
+      street: "567 Pine Street",
+      city: "Themyscira",
+      state: "Virgin Island",
+      zip: "12345",
+      department: "Marketing",
+    },
+    {
+      id: 5,
+      firstname: "Barry",
+      lastname: "Allen",
+      birthdate: "1992-04-30",
+      startdate: "2017-08-08",
+      street: "789 Cedar Lane",
+      city: "Central City",
+      state: "Missouri",
+      zip: "65432",
+      department: "Information Technology",
+    },
+    {
+      id: 6,
+      firstname: "Selina",
+      lastname: "Kyle",
+      birthdate: "1983-06-20",
+      startdate: "2014-03-25",
+      street: "101 Cat Alley",
+      city: "Gotham",
+      state: "New York",
+      zip: "10002",
+      department: "Finance",
+    },
+    {
+      id: 7,
+      firstname: "Clark",
+      lastname: "Kent",
+      birthdate: "1978-09-12",
+      startdate: "2003-12-05",
+      street: "234 Krypton Lane",
+      city: "Metropolis",
+      state: "Illinois",
+      zip: "54321",
+      department: "Engineering",
+    },
+    {
+      id: 8,
+      firstname: "Hal",
+      lastname: "Jordan",
+      birthdate: "1981-02-05",
+      startdate: "2011-06-30",
+      street: "345 Lantern Road",
+      city: "Coast City",
+      state: "California",
+      zip: "90002",
+      department: "Human Resources",
+    },
+    {
+      id: 9,
+      firstname: "Peter",
+      lastname: "Parker",
+      birthdate: "1995-01-15",
+      startdate: "2018-09-22",
+      street: "456 Spider Lane",
+      city: "New York",
+      state: "New York",
+      zip: "10003",
+      department: "Legal",
+    },
+    {
+      id: 10,
+      firstname: "Natasha",
+      lastname: "Romanoff",
+      birthdate: "1984-03-25",
+      startdate: "2013-07-12",
+      street: "567 Widow Avenue",
+      city: "Malibu",
+      state: "California",
+      zip: "12346",
+      department: "Marketing",
+    },
+    {
+      id: 11,
+      firstname: "Tony",
+      lastname: "Stark",
+      birthdate: "1970-12-30",
+      startdate: "1998-05-18",
+      street: "678 Iron Street",
+      city: "Malibu",
+      state: "California",
+      zip: "90003",
+      department: "Information Technology",
+    },
+    {
+      id: 12,
+      firstname: "Steve",
+      lastname: "Rogers",
+      birthdate: "1920-07-04",
+      startdate: "1941-03-10",
+      street: "789 Patriot Lane",
+      city: "Brooklyn",
+      state: "New York",
+      zip: "10004",
+      department: "Finance",
+    },
+    {
+      id: 13,
+      firstname: "Thor",
+      lastname: "Odinson",
+      birthdate: "1989-11-15",
+      startdate: "2016-02-20",
+      street: "890 Thunder Road",
+      city: "Asgard",
+      state: "Hawaii",
+      zip: "54322",
+      department: "Engineering",
+    },
+    {
+      id: 14,
+      firstname: "Wanda",
+      lastname: "Maximoff",
+      birthdate: "1987-05-03",
+      startdate: "2012-08-10",
+      street: "101 Scarlet Lane",
+      city: "Malibu",
+      state: "California",
+      zip: "65433",
+      department: "Human Resources",
+    },
+    {
+      id: 15,
+      firstname: "Bruce",
+      lastname: "Banner",
+      birthdate: "1975-08-08",
+      startdate: "2000-11-25",
+      street: "202 Gamma Street",
+      city: "Belle Fourche",
+      state: "South Dakota",
+      zip: "10005",
+      department: "Legal",
+    },
+    {
+      id: 16,
+      firstname: "Carol",
+      lastname: "Danvers",
+      birthdate: "1986-06-18",
+      startdate: "2015-04-15",
+      street: "303 Captain Avenue",
+      city: "Hala",
+      state: "Virgin Island",
+      zip: "12347",
+      department: "Marketing",
+    },
   ],
 };
 
@@ -87,22 +243,18 @@ const employeesSlice = createSlice({
         };
 
         state.employees.push(newEmployee);
+        console.log("Employee ajouté avec succès.");
       } else {
         console.error(
           "action.payload doit contenir toutes les informations nécessaires."
         );
       }
     },
-    removeEmployee: (state, action) => {
-      state.employees = state.employees.filter(
-        (employee) => employee.id !== action.payload
-      );
-    },
   },
 });
 
 const { actions, reducer } = employeesSlice;
 
-export const { addEmployee, removeEmployee, updateEmployee } = actions;
+export const { addEmployee } = actions;
 
 export default reducer;

@@ -1147,10 +1147,10 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@baptistej/react-dropdown@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@baptistej/react-dropdown/-/react-dropdown-1.0.4.tgz#93a8a07bd0e1d93053c5a47eb472f4c5775c5589"
-  integrity sha512-24MJpurpcJfseAuY9I7j2GLvpfNQhBf87xvGQNMqyVIg9Pzglk01w4gVNiyo3fXqJrHWIVj3jw1WSbb7KfHDCg==
+"@baptistej/react-dropdown@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@baptistej/react-dropdown/-/react-dropdown-1.0.8.tgz#8d91728df0387a243cf516e99d19463aa36fe0d5"
+  integrity sha512-Y6Ejr7Kugu9zAvi5ugr+vdG4fDZhw+fYG+EA9d7LfWjiFDZJ34ZhIO5HicDp/p7Xs424HkPEogXZPvAXfT1xkQ==
   dependencies:
     prop-types "^15.8.1"
     react "^18.2.0"

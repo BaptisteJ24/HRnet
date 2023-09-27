@@ -1,26 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import Dropdown from "@baptistej/react-dropdown";
-import { capitalizeFirstLetter } from "../../utils/utils";
+import ReactModal from "react-modal";
 import DatePicker from "react-datepicker";
-import PropTypes from "prop-types";
+import axios from "axios";
+import { capitalizeFirstLetter, formatDateToString } from "../../utils/utils";
+import * as EmployeesActions from "../../features/employees";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import axios from "axios";
+const Form = () => {
+  const { register, handleSubmit, setValue, formState } = useForm();
+  const { errors } = formState;
 
-const Form = ({ handleShowModal }) => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const dispatch = useDispatch();
 
   const [states, setStates] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [birthdate, setBirthdate] = useState(null);
-  const [startdate, setStartDate] = useState(null);
+  const [startdate, setStartdate] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [resetDropdown, setResetDropdown] = useState(false);
+
+  const formRef = useRef(null);
+
+  ReactModal.setAppElement("#root");
 
   useEffect(() => {
     axios
@@ -35,10 +40,25 @@ const Form = ({ handleShowModal }) => {
       });
   }, []);
 
+  const handleReset = () => {
+    resetForm();
+    setShowModal(false);
+  };
+
+  const resetForm = () => {
+    setResetDropdown(!resetDropdown);
+    formRef.current.reset();
+    setBirthdate(null);
+    setStartdate(null);
+  };
+
   const onSubmit = (data) => {
     if (checkValidity(data)) {
-      console.log("Form submitted successfully :", data);
-      handleShowModal(true);
+      data.birthdate = formatDateToString(birthdate);
+      data.startdate = formatDateToString(startdate);
+      setShowModal(true);
+      console.log("Form submitted :", data);
+      dispatch(EmployeesActions.addEmployee(data));
     } else {
       console.log("Form not submitted. Please check the fields :", data);
     }
@@ -53,25 +73,56 @@ const Form = ({ handleShowModal }) => {
       "street",
       "city",
       "state",
-      "zipcode",
+      "zip",
       "department",
     ];
+
+    const validationRules = {
+      firstname: (value) => {
+        return value.length >= 3;
+      },
+      lastname: (value) => {
+        return value.length >= 3;
+      },
+      birthdate: (date) => {
+        const eighteenYearsAgo = new Date();
+        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+        return date <= eighteenYearsAgo;
+      },
+      startdate: (startdate) => {
+        const ageAtAdmission =
+          startdate.getFullYear() - birthdate.getFullYear();
+        return ageAtAdmission >= 18;
+      },
+      state: (value) => {
+        return states.includes(value);
+      },
+      department: (value) => {
+        return departments.includes(value);
+      },
+      zip: (value) => {
+        return value.length === 5 && !isNaN(value);
+      },
+      street: (value) => {
+        return value.length >= 5;
+      },
+      city: (value) => {
+        return value.length >= 3;
+      },
+    };
 
     const hasAllRequiredFields = requiredFields.every(
       (fieldName) => !!data[fieldName]
     );
 
-    const areAllFieldsValid = requiredFields.every(
-      (fieldName) => !errors[fieldName]
-    );
-
-    const birthdateIsValid = () => {
-      const eighteenYearsAgo = new Date();
-      eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
-      return birthdate <= eighteenYearsAgo;
-    };
-
-    return hasAllRequiredFields && areAllFieldsValid && birthdateIsValid();
+    const areAllFieldsValid = requiredFields.every((fieldName) => {
+      const validationRule = validationRules[fieldName];
+      if (validationRule) {
+        return validationRule(data[fieldName]);
+      }
+      return !errors[fieldName];
+    });
+    return hasAllRequiredFields && areAllFieldsValid;
   };
 
   const dropdownStyles = {
@@ -112,7 +163,7 @@ const Form = ({ handleShowModal }) => {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form" onSubmit={handleSubmit(onSubmit)} ref={formRef}>
       <div className="form__content">
         <div className="form__content__wrapper">
           {["firstname", "lastname"].map((name) => (
@@ -135,7 +186,7 @@ const Form = ({ handleShowModal }) => {
                   handleFieldChange(name, date);
                   name === "birthdate"
                     ? setBirthdate(date)
-                    : setStartDate(date);
+                    : setStartdate(date);
                 }}
                 dateFormat="dd/MM/yyyy"
                 placeholderText={capitalizeFirstLetter(name)}
@@ -161,11 +212,12 @@ const Form = ({ handleShowModal }) => {
               data={states}
               styles={dropdownStyles}
               onSelected={(value) => handleFieldChange("state", value)}
+              reset={resetDropdown}
             />
           </label>
-          <label {...labelProps("zipcode")}>
+          <label {...labelProps("zip")}>
             <span className="label__title">ZIP Code</span>
-            <input {...inputProps("zipcode")} />
+            <input {...inputProps("zip")} />
           </label>
         </div>
       </div>
@@ -177,21 +229,25 @@ const Form = ({ handleShowModal }) => {
           data={departments}
           styles={dropdownStyles}
           onSelected={(value) => handleFieldChange("department", value)}
+          reset={resetDropdown}
         />
       </label>
       <button type="submit" className="button">
         <span>Save</span>
       </button>
+      <ReactModal
+        isOpen={showModal}
+        contentLabel="Success Modal"
+        className="create-employee__modal"
+        overlayClassName="create-employee__modal__overlay"
+      >
+        <p>New Employee Created !</p>
+        <button className="button" onClick={handleReset}>
+          Close
+        </button>
+      </ReactModal>
     </form>
   );
-};
-
-Form.defaultProps = {
-  handleShowModal: () => {},
-};
-
-Form.propTypes = {
-  handleShowModal: PropTypes.func,
 };
 
 export default Form;
