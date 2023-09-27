@@ -1,8 +1,19 @@
-# React + Vite
+# HRnet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend for HRnet - React Redux
 
-Currently, two official plugins are available:
+Mission : Faire passer une librairie jQuery vers React
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Compétences :
+
+- Analyser la performance d'une application web,
+- Déployer une application front-end,
+- Refondre une application pour réduire la dette technique,
+- Mettre en place son environnement Front-End,
+- Produire une documentation technique pour une application.
+
+Fait par : Baptiste JAN
+
+Disponible sur : https://baptiste-jan-hrnet.netlify.app/
+
+Mis à jour le 27/09/23.
