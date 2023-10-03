@@ -165,8 +165,6 @@ const Form = () => {
     },
     dropdownSelected: {
       width: "100%",
-      padding: "5px",
-      height: "35px",
       border: "1px solid #13262f",
       borderRadius: "0.25rem",
     },
