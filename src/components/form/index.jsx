@@ -11,6 +11,7 @@ import { capitalizeFirstLetter, formatDateToString } from "../../utils/utils";
 
 // Styles
 import "react-datepicker/dist/react-datepicker.css";
+import "@baptistej/react-dropdown/dist/style.css";
 
 /**
  * description: Form component for creating a new employee
@@ -249,7 +250,7 @@ const Form = () => {
               <input {...inputProps(name)} />
             </label>
           ))}
-          <label className="form__label">
+          <div className="form__label">
             <span className="label__title">State</span>
             <Dropdown
               id="state"
@@ -259,14 +260,14 @@ const Form = () => {
               onSelected={(value) => handleFieldChange("state", value)}
               reset={resetDropdown}
             />
-          </label>
+          </div>
           <label {...labelProps("zip")}>
             <span className="label__title">ZIP Code</span>
             <input {...inputProps("zip")} />
           </label>
         </div>
       </div>
-      <label className="form__label">
+      <div className="form__label">
         <span className="label__title">Department</span>
         <Dropdown
           id="department"
@@ -276,7 +277,7 @@ const Form = () => {
           onSelected={(value) => handleFieldChange("department", value)}
           reset={resetDropdown}
         />
-      </label>
+      </div>
       <button type="submit" className="button">
         <span>Save</span>
       </button>

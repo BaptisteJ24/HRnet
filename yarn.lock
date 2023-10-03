@@ -1147,15 +1147,12 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@baptistej/react-dropdown@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@baptistej/react-dropdown/-/react-dropdown-1.0.8.tgz#8d91728df0387a243cf516e99d19463aa36fe0d5"
-  integrity sha512-Y6Ejr7Kugu9zAvi5ugr+vdG4fDZhw+fYG+EA9d7LfWjiFDZJ34ZhIO5HicDp/p7Xs424HkPEogXZPvAXfT1xkQ==
+"@baptistej/react-dropdown@^1.0.19":
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@baptistej/react-dropdown/-/react-dropdown-1.0.19.tgz#a62d7a337956863de47366b9707ddf132a1fb81a"
+  integrity sha512-EmlqFcXF/wL8V4bzjzTHQ+CQIb6/HsEtZV50T6PDPNnfyEy06F91tNW6yGXHzQ+glpqzBmjhH7xgh2adb8zi6Q==
   dependencies:
     prop-types "^15.8.1"
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    vite-plugin-css-injected-by-js "^3.3.0"
 
 "@emotion/is-prop-valid@^1.2.1":
   version "1.2.1"
@@ -3540,11 +3537,6 @@ use-sync-external-store@^1.0.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
-
-vite-plugin-css-injected-by-js@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-css-injected-by-js/-/vite-plugin-css-injected-by-js-3.3.0.tgz#c19480a9e42a95c5bced976a9dde1446f9bd91ff"
-  integrity sha512-xG+jyHNCmUqi/TXp6q88wTJGeAOrNLSyUUTp4qEQ9QZLGcHWQQsCsSSKa59rPMQr8sOzfzmWDd8enGqfH/dBew==
 
 vite@^4.4.5:
   version "4.4.9"
